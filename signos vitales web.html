@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signos Vitales del Bebé</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #43a047;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .vital-signs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .vital-sign {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .alerts {
+            background-color: #ef9a9a;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Signos Vitales del Bebé</h1>
+    </header>
+    <div class="container">
+        <div class="vital-signs">
+            <div class="vital-sign temperature">
+                <h2>Temperatura</h2>
+                <p>37.2°C</p>
+            </div>
+            <div class="vital-sign oxygen">
+                <h2>Oxigenación</h2>
+                <p>99%</p>
+            </div>
+            <div class="vital-sign heartbeat">
+                <h2>Pulsaciones</h2>
+                <p>110 bpm</p>
+            </div>
+        </div>
+        <div class="alerts hidden">
+            <h2>Alertas</h2>
+            <p id="alertMessage">No hay alertas actualmente.</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulación de cambio de signos vitales y alertas
+        setInterval(function() {
+            // Generar valores aleatorios para los signos vitales
+            let temperature = (Math.random() * 1.5) + 36.5;
+            let oxygen = Math.floor(Math.random() * 6) + 94;
+            let heartbeat = Math.floor(Math.random() * 31) + 100;
+
+            // Actualizar los valores en la interfaz
+            document.querySelector('.temperature p').textContent = temperature.toFixed(1) + '°C';
+            document.querySelector('.oxygen p').textContent = oxygen + '%';
+            document.querySelector('.heartbeat p').textContent = heartbeat + ' bpm';
+
+            // Verificar si hay alguna alerta y mostrarla
+            let alertMessage = '';
+            if (temperature > 37.5 || temperature < 36 || oxygen < 95 || heartbeat > 130 || heartbeat < 80) {
+                alertMessage = '¡Alerta! Se han detectado signos vitales anormales.';
+            } else {
+                alertMessage = 'No hay alertas actualmente.';
+            }
+            document.getElementById('alertMessage').textContent = alertMessage;
+
+            // Mostrar o ocultar el área de alertas según sea necesario
+            if (alertMessage !== 'No hay alertas actualmente.') {
+                document.querySelector('.alerts').classList.remove('hidden');
+            } else {
+                document.querySelector('.alerts').classList.add('hidden');
+            }
+        }, 5000); // Actualizar cada 5 segundos
+    </script>
+</body>
+</html>
